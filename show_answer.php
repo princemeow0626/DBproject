@@ -118,10 +118,10 @@ mysqli_query($conn, $update_status);
 
         if (isset($_GET['error'])) { ?>
 
-    <p class="error"><?php echo $_GET['error']; ?></p>
-    
+            <p class="error"><?php echo $_GET['error']; ?></p>
 
-    <?php }
+
+        <?php }
         echo "<div class='answer'>";
         echo "<h3>Answers:</h3>";
         $sql_check_best = "SELECT best FROM question WHERE qid = $qid AND best is not null";
@@ -139,10 +139,10 @@ mysqli_query($conn, $update_status);
             $aid_real = $item['aid'];
             echo "<hr>";
             if ($r_row[1] == $_SESSION['uid']){
-            echo "<form method='post'>
+                echo "<form method='post'>
             <button type='submit' class='form-control' name='best_button' value='choose best answer($aid_real)'><img src='check_mark.png' height='20'></button>
             </form>";
-        }
+            }
 
             echo "<div class='container'><div id='left-10'>";
             echo "<form method='post'><button type='submit' name='upvote_button' value=vote($aid_real)$nam><img src='thumbup.jpg' height='20'></button>" . "\n" . $item['thumb_up'] . "</form>";
@@ -157,7 +157,7 @@ mysqli_query($conn, $update_status);
 
             $count += 1;
         endforeach;
-        
+
         //assign next-in-line aid to variable $aid
         $aid = $count;
 
@@ -193,7 +193,7 @@ mysqli_query($conn, $update_status);
                 if ($res_vote) {
                     $sql_vote_track = "INSERT INTO vote_track VALUES (" . $_SESSION['uid'] . ", $qid, $vote_aid)";
                     mysqli_query($conn, $sql_vote_track);
-                    header('Location: show_answer.php');
+                    echo("<script>location.href = 'show_answer.php';</script>");
                 } else {
                     echo 'Error: ' . mysqli_error($conn);
                 }
